@@ -1,3 +1,4 @@
+import 'package:cubos_academy/trivia_screen.dart';
 import 'package:flutter/material.dart';
 
 class InitialScreen extends StatelessWidget {
@@ -26,7 +27,10 @@ class InitialScreen extends StatelessWidget {
             height: 88.0,
           ),
           FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => TriviaScreen()));
+            },
             color: Color(0xffDA0175),
             textColor: Color(0XFFf7f7f7),
             shape:
