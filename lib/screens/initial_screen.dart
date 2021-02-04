@@ -1,5 +1,5 @@
-import 'package:cubos_academy/trivia_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:cubos_academy/screens/trivia_screen.dart';
 
 class InitialScreen extends StatelessWidget {
   @override

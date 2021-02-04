@@ -1,6 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+
+import 'package:cubos_academy/models/question.dart';
+import 'package:cubos_academy/screens/score_screen.dart';
 
 class TriviaScreen extends StatefulWidget {
   @override
@@ -9,11 +10,32 @@ class TriviaScreen extends StatefulWidget {
 
 class _TriviaScreenState extends State<TriviaScreen> {
   int answer = 0;
+  int score = 0;
+  int index = 0;
+  List<Question> questionList = Question.getQuestionsList();
 
   void changeAnswer(int value) {
     setState(() {
       answer = value;
     });
+  }
+
+  void verifyResponse(BuildContext context) {
+    if (answer == questionList[index].answer) {
+      score++;
+    } else {
+      score--;
+    }
+
+    if (index < questionList.length - 1) {
+      setState(() {
+        index++;
+        answer = 0;
+      });
+    } else {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => ScoreScreen()));
+    }
   }
 
   @override
@@ -39,7 +61,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
                 SizedBox(
                   height: 16.0,
                 ),
-                Text('O que é flutter',
+                Text(questionList[index].questionText,
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w400,
@@ -65,8 +87,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
                 child: RadioListTile(
                   value: 1,
                   groupValue: answer,
-                  title: Text(
-                      'lorem ipsum dolor sit amet consectetur adipiscing elit?'),
+                  title: Text(questionList[index].option1),
                   onChanged: changeAnswer,
                 ),
               ),
@@ -85,8 +106,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
                 child: RadioListTile(
                   value: 2,
                   groupValue: answer,
-                  title: Text(
-                      'lorem ipsum dolor sit amet consectetur adipiscing elit?'),
+                  title: Text(questionList[index].option2),
                   onChanged: changeAnswer,
                 ),
               ),
@@ -105,8 +125,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
                 child: RadioListTile(
                   value: 3,
                   groupValue: answer,
-                  title: Text(
-                      'lorem ipsum dolor sit amet consectetur adipiscing elit?'),
+                  title: Text(questionList[index].option3),
                   onChanged: changeAnswer,
                 ),
               ),
@@ -125,13 +144,37 @@ class _TriviaScreenState extends State<TriviaScreen> {
                 child: RadioListTile(
                   value: 4,
                   groupValue: answer,
-                  title: Text(
-                      'lorem ipsum dolor sit amet consectetur adipiscing elit?'),
+                  title: Text(questionList[index].option4),
                   onChanged: changeAnswer,
                 ),
               ),
             ],
-          ))
+          )),
+          Container(
+            height: 87,
+            decoration: BoxDecoration(color: Colors.white, boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.25),
+                  spreadRadius: 3,
+                  blurRadius: 5,
+                  offset: Offset(0, -1))
+            ]),
+            child: Center(
+              child: FlatButton(
+                onPressed: () => verifyResponse(context),
+                color: Color(0xffDA0175),
+                textColor: Color(0XffF7F7F7),
+                padding: EdgeInsets.fromLTRB(60, 11, 60, 11),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                child: Text('Responder',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    )),
+              ),
+            ),
+          ),
         ],
       ),
     );

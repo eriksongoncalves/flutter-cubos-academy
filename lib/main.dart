@@ -1,4 +1,4 @@
-import 'package:cubos_academy/initial_screen.dart';
+import 'package:cubos_academy/screens/initial_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
