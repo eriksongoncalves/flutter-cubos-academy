@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ScoreScreen extends StatelessWidget {
+  final int result;
+  final int maximum;
+
+  ScoreScreen({Key key, @required this.result, @required this.maximum});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +19,41 @@ class ScoreScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Expanded(child: Container()),
+          Expanded(
+              child: Column(
+            children: [
+              SizedBox(
+                height: 113,
+              ),
+              Text('VOCÊ ACERTOU',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xff263238),
+                  )),
+              SizedBox(
+                height: 60,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                children: [
+                  Text('$result',
+                      style: TextStyle(
+                        fontSize: 100,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xffDA0175),
+                      )),
+                  Text('/ $maximum',
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xff263238),
+                      )),
+                ],
+              )
+            ],
+          )),
           Container(
             height: 87,
             decoration: BoxDecoration(color: Colors.white, boxShadow: [
@@ -26,7 +65,8 @@ class ScoreScreen extends StatelessWidget {
             ]),
             child: Center(
               child: FlatButton(
-                onPressed: () => {},
+                onPressed: () =>
+                    {Navigator.popUntil(context, (route) => route.isFirst)},
                 color: Color(0xffDA0175),
                 textColor: Color(0XffF7F7F7),
                 padding: EdgeInsets.fromLTRB(60, 11, 60, 11),

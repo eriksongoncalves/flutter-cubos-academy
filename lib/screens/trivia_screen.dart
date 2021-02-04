@@ -22,19 +22,20 @@ class _TriviaScreenState extends State<TriviaScreen> {
 
   void verifyResponse(BuildContext context) {
     if (answer == questionList[index].answer) {
-      score++;
-    } else {
-      score--;
+      score = score + 1;
     }
 
     if (index < questionList.length - 1) {
       setState(() {
-        index++;
         answer = 0;
+        index++;
       });
     } else {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => ScoreScreen()));
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  ScoreScreen(result: score, maximum: questionList.length)));
     }
   }
 
